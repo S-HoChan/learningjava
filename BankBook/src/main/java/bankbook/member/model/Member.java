@@ -47,4 +47,10 @@ public class Member {
     public void setName(String name) {
         this.name = name;
     }
+
+    // 회원정보를 Text파일에 저장하는 형태로 변환
+    public String convert2TextData() {
+        return id + " " + password + " " + name;
+    }
+
 }

@@ -3,6 +3,7 @@ package main.java.bankbook.member.repository;
 import main.java.bankbook.common.util.ScannerService;
 import main.java.bankbook.member.model.Member;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,15 +17,17 @@ public class MemberRepository {
 
     private Scanner scanner;
 
+    private BufferedWriter bufferedWriter;
+
     private FileWriter fileWriter;
 
     public MemberRepository() {
         scanner = ScannerService.getFileScanner(MEMBER_FILE_PATH);
     }
 
-    public void openWrite() {
+    public void openWriter() {
         try {
-            fileWriter = new FileWriter(new File(MEMBER_FILE_PATH), true); // appendMode? : 이어쓰기 하는가?
+            bufferedWriter = new BufferedWriter(new FileWriter(new File(MEMBER_FILE_PATH), true)); // appendmode : 이어쓰기
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,5 +74,18 @@ public class MemberRepository {
             }
         }
         return false;
+    }
+    //신규회원가입
+    public Member insertMember(Member member) {
+
+        try {
+            openWriter();                                       //파일에 쓸 툴 오픈
+            bufferedWriter.write(member.convert2TextData());    //데이터를 씀
+            bufferedWriter.flush();                             //데이터를 밀어넣음
+            bufferedWriter.close();                             //파일툴을 닫는다
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return member;                                          //데이터를 계속 활용하기 위함
     }
 }
