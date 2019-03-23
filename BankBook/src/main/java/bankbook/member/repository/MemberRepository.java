@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MemberRepository {
-    private static final String MEMBER_FILE_PATH = "C:/Users/User/IdeaProjects/BankBook/src/main/resource/member.txt";
+    private static final String MEMBER_FILE_PATH = "C://Users//User//Desktop//dev//learningjava//BankBook//src//main//resource//member.txt";
     private static final String SEPARATOR = " ";
 
     private Scanner scanner;
